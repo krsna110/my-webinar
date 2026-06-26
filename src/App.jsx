@@ -7,6 +7,9 @@ import {
   ArrowRight, Mail, Phone, MapPin, Globe
 } from 'lucide-react';
 
+// Razorpay payment link - replace '#' with your actual Razorpay URL
+const RAZORPAY_URL = "#";
+
 // ------------------------------------------------------------
 // 1. CUSTOM CURSOR COMPONENT
 // ------------------------------------------------------------
@@ -587,8 +590,19 @@ function App() {
     <div className="bg-[#111111] text-white font-['Plus_Jakarta_Sans'] overflow-x-clip">
       <CustomCursor />
 
+      {/* Scrolling Ticker Bar */}
+      <div className="fixed top-0 left-0 w-full z-50 bg-[#161616] border-b border-blue-500/20 py-2.5 overflow-hidden select-none">
+        <div className="flex whitespace-nowrap ticker-animate">
+          {Array(10).fill("🔴 LIVE WEBINAR · Only ₹9 · Seats Filling Fast").map((text, i) => (
+            <span key={i} className="text-blue-400 font-bold uppercase tracking-wider text-xs md:text-sm mx-6 inline-flex items-center">
+              {text}
+            </span>
+          ))}
+        </div>
+      </div>
+
       {/* Navbar */}
-      <nav className="fixed top-0 left-0 w-full z-50 px-4 md:px-10 pt-4 md:pt-6">
+      <nav className="fixed top-9 left-0 w-full z-50 px-4 md:px-10 pt-4 md:pt-6">
         <div className="flex items-center justify-between max-w-7xl mx-auto bg-white/5 backdrop-blur-xl border border-white/10 rounded-full px-6 md:px-8 py-3 shadow-[0_8px_32px_rgba(0,0,0,0.4)]">
           <div className="text-2xl font-bold text-white">PRANSHUL AI<span className="text-blue-400">.</span></div>
 
@@ -598,7 +612,7 @@ function App() {
             <a href="#modules" className="hover:text-blue-400 transition-colors">Modules</a>
             <a href="#trainer" className="hover:text-blue-400 transition-colors">Trainer</a>
             <a href="#faq" className="hover:text-blue-400 transition-colors">FAQ</a>
-            <a href="#register" className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded-full transition-colors">
+            <a href={RAZORPAY_URL} className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded-full transition-colors">
               Register ₹9
             </a>
           </div>
@@ -624,7 +638,7 @@ function App() {
             <a href="#modules" className="text-[#D7E2EA] hover:text-blue-400" onClick={() => setIsMenuOpen(false)}>Modules</a>
             <a href="#trainer" className="text-[#D7E2EA] hover:text-blue-400" onClick={() => setIsMenuOpen(false)}>Trainer</a>
             <a href="#faq" className="text-[#D7E2EA] hover:text-blue-400" onClick={() => setIsMenuOpen(false)}>FAQ</a>
-            <a href="#register" className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded-full text-center transition-colors" onClick={() => setIsMenuOpen(false)}>
+            <a href={RAZORPAY_URL} className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded-full text-center transition-colors" onClick={() => setIsMenuOpen(false)}>
               Register ₹9
             </a>
           </motion.div>
@@ -634,66 +648,78 @@ function App() {
       {/* ------------------------------------------------------------
           HERO SECTION
           ------------------------------------------------------------ */}
-      <section className="relative h-screen flex flex-col justify-center items-center overflow-hidden">
+      <section className="relative min-h-screen flex flex-col justify-center items-center py-28 md:py-36 overflow-hidden">
         {/* Canvas background */}
         <canvas id="hero-canvas" className="absolute inset-0 w-full h-full pointer-events-none" />
 
-        <div className="relative z-10 text-center max-w-5xl mx-auto px-5 sm:px-8">
+        <div className="relative z-10 text-center max-w-5xl mx-auto px-5 sm:px-8 flex flex-col items-center">
           <FadeIn delay={0} y={-20}>
-            <div className="inline-block bg-blue-500/20 backdrop-blur-sm text-blue-300 text-sm font-medium px-4 py-1 rounded-full border border-blue-400/30 mb-6">
-              🔴 LIVE ONLINE WORKSHOP · Beginner‑Friendly · Seats Limited
+            <div className="flex flex-wrap justify-center gap-3 mb-6">
+              <span className="px-3.5 py-1.5 text-xs font-semibold uppercase tracking-wider rounded-full border border-blue-400/30 bg-blue-500/10 text-blue-300">
+                Limited Seats
+              </span>
+              <span className="px-3.5 py-1.5 text-xs font-semibold uppercase tracking-wider rounded-full bg-blue-600 text-white shadow-[0_0_15px_rgba(59,130,246,0.5)]">
+                Live Webinar
+              </span>
+              <span className="px-3.5 py-1.5 text-xs font-semibold uppercase tracking-wider rounded-full border border-emerald-400/30 bg-emerald-500/10 text-emerald-300">
+                Beginner Friendly
+              </span>
             </div>
           </FadeIn>
 
           <FadeIn delay={0.15} y={40}>
-            <h1 className="text-5xl sm:text-7xl md:text-8xl lg:text-9xl font-black uppercase tracking-tight leading-none bg-gradient-to-b from-[#646973] to-[#BBCCD7] text-transparent bg-clip-text">
-              The 6 AI Skills<br />
-              <span className="text-white">People Are Quietly Using</span>
+            <h1 className="text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-black tracking-tight leading-tight max-w-5xl mx-auto">
+              <span className="bg-gradient-to-b from-white via-[#E2E8F0] to-[#94A3B8] text-transparent bg-clip-text">
+                Every Skill That's Making People Rich With AI —
+              </span>{' '}
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-cyan-300 drop-shadow-[0_2px_10px_rgba(59,130,246,0.3)]">
+                In One Night.
+              </span>
             </h1>
           </FadeIn>
 
           <FadeIn delay={0.35} y={20} className="mt-6">
-            <p className="text-[#D7E2EA] text-lg sm:text-xl md:text-2xl max-w-3xl mx-auto leading-relaxed">
-              No coding. No expensive tools. No tech background. Just the exact, practical systems a working AI creator uses every day — explained step by step so you can use them the same night.
+            <p className="text-[#D7E2EA]/80 text-base sm:text-lg md:text-xl max-w-3xl mx-auto leading-relaxed font-medium">
+              6 high-income AI skills. One live session. Zero technical background needed. Learn what's actually working – from someone who uses it daily.
             </p>
           </FadeIn>
 
-          <FadeIn delay={0.5} y={20} className="mt-8">
-            <div className="flex flex-wrap justify-center gap-4 text-sm text-[#D7E2EA]/70">
-              <span>📅 [DATE]</span>
-              <span>🕘 [TIME + TIME ZONE]</span>
-              <span>⏳ [DURATION]</span>
-              <span>💻 Online (link after register)</span>
+          {/* YouTube Video Embed */}
+          <FadeIn delay={0.5} y={30} className="mt-12 w-full max-w-4xl mx-auto px-4">
+            <div className="relative aspect-video w-full rounded-2xl md:rounded-[32px] overflow-hidden border border-white/10 video-glow bg-[#1a1a1a]">
+              <iframe
+                className="absolute inset-0 w-full h-full"
+                src="https://www.youtube.com/embed/M-NTwkM3VwM?autoplay=0&rel=0"
+                title="YouTube video player"
+                frameBorder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                allowFullScreen
+              />
             </div>
           </FadeIn>
 
-          <FadeIn delay={0.6} y={20} className="mt-8">
-            <div className="flex flex-wrap justify-center gap-6 text-left text-[#D7E2EA] text-sm max-w-2xl mx-auto">
-              <div className="flex items-start gap-2"><CheckCircle className="w-5 h-5 text-blue-400 flex-shrink-0 mt-0.5" /> Build real AI outputs during the session</div>
-              <div className="flex items-start gap-2"><CheckCircle className="w-5 h-5 text-blue-400 flex-shrink-0 mt-0.5" /> Plug‑and‑play prompt system you keep</div>
-              <div className="flex items-start gap-2"><CheckCircle className="w-5 h-5 text-blue-400 flex-shrink-0 mt-0.5" /> Roadmap to your first AI income</div>
-              <div className="flex items-start gap-2"><CheckCircle className="w-5 h-5 text-blue-400 flex-shrink-0 mt-0.5" /> Live recording + private community</div>
-            </div>
-          </FadeIn>
+          {/* Trainer Info, CTA & Social Proof */}
+          <FadeIn delay={0.65} y={20} className="mt-10 w-full max-w-4xl mx-auto px-4">
+            <div className="flex flex-col md:flex-row items-center justify-between gap-6 bg-white/5 border border-white/10 rounded-2xl p-6 md:p-8 backdrop-blur-md w-full">
+              <div className="text-center md:text-left">
+                <p className="text-[#D7E2EA]/60 text-xs uppercase tracking-wider font-semibold">Trainer & Host</p>
+                <h3 className="text-xl font-bold text-white mt-1">Pranshul</h3>
+                <p className="text-blue-400 text-sm font-semibold">AI Creator & Trainer</p>
+              </div>
 
-          <FadeIn delay={0.75} y={20} className="mt-10">
-            <div className="inline-block bg-[#1a1a1a] border border-[#2a2a2a] rounded-2xl p-6 backdrop-blur-sm">
-              <div className="flex flex-col sm:flex-row items-center gap-4">
-                <div>
-                  <span className="text-3xl font-bold text-white">₹9</span>
-                  <span className="text-[#D7E2EA]/60 line-through ml-3">₹999</span>
-                  <p className="text-sm text-[#D7E2EA]/60">Yes, ₹9 – no catch, explained below</p>
-                </div>
+              <div className="flex flex-col items-center md:items-end gap-3">
                 <MagneticButton>
                   <a
-                    href="#register"
-                    className="bg-blue-600 hover:bg-blue-700 text-white font-semibold px-8 py-3 rounded-full shadow-lg shadow-blue-500/30 transition-all inline-block"
+                    href={RAZORPAY_URL}
+                    className="bg-blue-600 hover:bg-blue-700 text-white font-bold px-8 py-3.5 rounded-full shadow-lg shadow-blue-500/30 transition-all inline-block text-center min-w-[240px]"
                   >
-                    Reserve My Seat — ₹9
+                    Book My Seat for ₹9
                   </a>
                 </MagneticButton>
+                <p className="text-xs text-[#D7E2EA]/60 font-bold tracking-wider uppercase">
+                  ⚡ 26+ Professionals are already ahead of you
+                </p>
               </div>
-              <p className="text-xs text-[#D7E2EA]/40 mt-3">🔒 Secure payment · Instant confirmation · Recording included</p>
             </div>
           </FadeIn>
         </div>
@@ -1035,7 +1061,7 @@ function App() {
             <div className="mt-10">
               <MagneticButton>
                 <a
-                  href="#"
+                  href={RAZORPAY_URL}
                   className="bg-blue-600 hover:bg-blue-700 text-white font-bold px-12 py-4 rounded-full shadow-lg shadow-blue-500/30 text-lg inline-block transition-all"
                 >
                   Lock In My ₹9 Seat
@@ -1064,7 +1090,7 @@ function App() {
             <div className="mt-10">
               <MagneticButton>
                 <a
-                  href="#"
+                  href={RAZORPAY_URL}
                   className="bg-blue-600 hover:bg-blue-700 text-white font-bold px-12 py-4 rounded-full shadow-lg shadow-blue-500/30 text-lg inline-block transition-all"
                 >
                   Reserve My Seat — Start Tonight for ₹9
