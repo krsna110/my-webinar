@@ -1,0 +1,16 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+  body {
+    @apply bg-[#111111] text-white font-['Plus_Jakarta_Sans'];
+    cursor: none;
+  }
+  * {
+    @apply box-border m-0 p-0;
+  }
+}
