@@ -232,36 +232,42 @@ const StickyCardStack = () => {
       title: 'Quick Start — AI Foundations',
       desc: 'No jargon, no overwhelm. Understand ChatGPT and Claude, see real examples of AI growing businesses.',
       who: 'For absolute beginners',
+      bgImage: '/module-01.png',
     },
     {
       id: '02',
       title: 'Income Multiplier — High‑Income Prompts',
       desc: 'Learn prompt psychology for ads, landing pages, sales copy – ready‑made frameworks for hooks and CTAs.',
       who: 'For freelancers & creators',
+      bgImage: '/module-02.png',
     },
     {
       id: '03',
       title: 'Creator Edge — AI Images & Video',
       desc: 'Designer‑quality visuals in 90 seconds. Workflows for thumbnails, ads, and short‑form video – no Photoshop.',
       who: 'For content creators',
+      bgImage: '/module-03.png',
     },
     {
       id: '04',
       title: 'Core Differentiator — The AI Script Engine',
       desc: 'Produce weeks of scripts (reels, ads, webinars) in a single afternoon using hook and CTA frameworks.',
       who: 'For busy marketers',
+      bgImage: '/module-04.png',
     },
     {
       id: '05',
       title: 'Faceless Scale — The AI Avatar System',
       desc: 'Build an AI‑powered presence on Instagram & YouTube without showing your face – same reach, zero screen time.',
       who: 'For camera‑shy creators',
+      bgImage: '/module-05.png',
     },
     {
       id: '06',
       title: 'The Money Module — AI Income Models',
       desc: 'Turn each skill into real income: freelancing, agency, content monetisation, automated systems – your roadmap.',
       who: 'For everyone wanting to earn',
+      bgImage: '/module-06.png',
     },
   ];
 
@@ -296,24 +302,34 @@ const StickyCardStack = () => {
                 className="sticky top-24 md:top-32 w-full h-[85vh] flex items-center justify-center"
                 style={{ scale, y }}
               >
-                <div className="w-full max-w-6xl h-[80vh] bg-[#111111] border-2 border-[#D7E2EA] rounded-[40px] sm:rounded-[50px] md:rounded-[60px] p-6 sm:p-8 md:p-10 flex flex-col">
-                  <div className="flex items-start justify-between">
-                    <span className="text-6xl sm:text-8xl md:text-9xl font-black text-[#D7E2EA] opacity-20">
-                      {mod.id}
-                    </span>
-                    <div className="text-right">
-                      <div className="text-sm uppercase tracking-widest text-[#D7E2EA]/60">{mod.who}</div>
-                      <h3 className="text-2xl sm:text-3xl md:text-4xl font-bold text-white mt-1">{mod.title}</h3>
+                <div className="relative w-full max-w-6xl h-[80vh] bg-[#111111] border-2 border-[#D7E2EA] rounded-[40px] sm:rounded-[50px] md:rounded-[60px] overflow-hidden">
+                  {/* Background image at 50% opacity */}
+                  <img
+                    src={mod.bgImage}
+                    alt=""
+                    aria-hidden="true"
+                    className="absolute inset-0 w-full h-full object-cover opacity-50 pointer-events-none select-none"
+                  />
+                  {/* Card content sits above the image */}
+                  <div className="relative z-10 w-full h-full p-6 sm:p-8 md:p-10 flex flex-col">
+                    <div className="flex items-start justify-between">
+                      <span className="text-6xl sm:text-8xl md:text-9xl font-black text-[#D7E2EA] opacity-20">
+                        {mod.id}
+                      </span>
+                      <div className="text-right">
+                        <div className="text-sm uppercase tracking-widest text-[#D7E2EA]/60">{mod.who}</div>
+                        <h3 className="text-2xl sm:text-3xl md:text-4xl font-bold text-white mt-1">{mod.title}</h3>
+                      </div>
                     </div>
-                  </div>
-                  <div className="flex-1 flex items-center justify-center">
-                    <p className="text-[#D7E2EA] text-lg sm:text-xl md:text-2xl max-w-3xl mx-auto text-center leading-relaxed">
-                      {mod.desc}
-                    </p>
-                  </div>
-                  <div className="flex justify-end">
-                    <div className="w-16 h-16 rounded-full border-2 border-[#D7E2EA]/30 flex items-center justify-center text-[#D7E2EA]">
-                      <ArrowRight className="w-8 h-8" />
+                    <div className="flex-1 flex items-center justify-center">
+                      <p className="text-[#D7E2EA] text-lg sm:text-xl md:text-2xl max-w-3xl mx-auto text-center leading-relaxed">
+                        {mod.desc}
+                      </p>
+                    </div>
+                    <div className="flex justify-end">
+                      <div className="w-16 h-16 rounded-full border-2 border-[#D7E2EA]/30 flex items-center justify-center text-[#D7E2EA]">
+                        <ArrowRight className="w-8 h-8" />
+                      </div>
                     </div>
                   </div>
                 </div>
