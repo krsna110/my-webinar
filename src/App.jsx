@@ -226,48 +226,50 @@ const StickyCardStack = () => {
     offset: ['start start', 'end end'],
   });
 
+  const BASE = import.meta.env.BASE_URL;
+
   const modules = [
     {
       id: '01',
       title: 'Quick Start — AI Foundations',
       desc: 'No jargon, no overwhelm. Understand ChatGPT and Claude, see real examples of AI growing businesses.',
       who: 'For absolute beginners',
-      bgImage: '/module-01.png',
+      bgImage: `${BASE}module-01.png`,
     },
     {
       id: '02',
       title: 'Income Multiplier — High‑Income Prompts',
       desc: 'Learn prompt psychology for ads, landing pages, sales copy – ready‑made frameworks for hooks and CTAs.',
       who: 'For freelancers & creators',
-      bgImage: '/module-02.png',
+      bgImage: `${BASE}module-02.png`,
     },
     {
       id: '03',
       title: 'Creator Edge — AI Images & Video',
       desc: 'Designer‑quality visuals in 90 seconds. Workflows for thumbnails, ads, and short‑form video – no Photoshop.',
       who: 'For content creators',
-      bgImage: '/module-03.png',
+      bgImage: `${BASE}module-03.png`,
     },
     {
       id: '04',
       title: 'Core Differentiator — The AI Script Engine',
       desc: 'Produce weeks of scripts (reels, ads, webinars) in a single afternoon using hook and CTA frameworks.',
       who: 'For busy marketers',
-      bgImage: '/module-04.png',
+      bgImage: `${BASE}module-04.png`,
     },
     {
       id: '05',
       title: 'Faceless Scale — The AI Avatar System',
       desc: 'Build an AI‑powered presence on Instagram & YouTube without showing your face – same reach, zero screen time.',
       who: 'For camera‑shy creators',
-      bgImage: '/module-05.png',
+      bgImage: `${BASE}module-05.png`,
     },
     {
       id: '06',
       title: 'The Money Module — AI Income Models',
       desc: 'Turn each skill into real income: freelancing, agency, content monetisation, automated systems – your roadmap.',
       who: 'For everyone wanting to earn',
-      bgImage: '/module-06.png',
+      bgImage: `${BASE}module-06.png`,
     },
   ];
 
