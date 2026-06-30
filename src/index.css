@@ -32,3 +32,77 @@
   box-shadow: 0 0 40px rgba(59, 130, 246, 0.15),
               0 0 80px rgba(59, 130, 246, 0.08);
 }
+
+/* ── Aurora Gradient Mesh Animations ── */
+@keyframes aurora-drift-1 {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  25%      { transform: translate(80px, 40px) scale(1.1); }
+  50%      { transform: translate(-30px, 80px) scale(0.95); }
+  75%      { transform: translate(-60px, -20px) scale(1.05); }
+}
+
+@keyframes aurora-drift-2 {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  25%      { transform: translate(-70px, 60px) scale(1.08); }
+  50%      { transform: translate(50px, -40px) scale(1.12); }
+  75%      { transform: translate(30px, 70px) scale(0.92); }
+}
+
+@keyframes aurora-drift-3 {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  25%      { transform: translate(60px, -50px) scale(1.1); }
+  50%      { transform: translate(-80px, 30px) scale(0.98); }
+  75%      { transform: translate(40px, 60px) scale(1.06); }
+}
+
+@keyframes aurora-drift-4 {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  25%      { transform: translate(-50px, -40px) scale(1.15); }
+  50%      { transform: translate(70px, 50px) scale(0.9); }
+  75%      { transform: translate(-30px, 30px) scale(1.08); }
+}
+
+.aurora-blob-1 {
+  animation: aurora-drift-1 12s ease-in-out infinite;
+  will-change: transform;
+  filter: blur(60px);
+}
+
+.aurora-blob-2 {
+  animation: aurora-drift-2 15s ease-in-out infinite;
+  will-change: transform;
+  filter: blur(70px);
+}
+
+.aurora-blob-3 {
+  animation: aurora-drift-3 18s ease-in-out infinite;
+  will-change: transform;
+  filter: blur(60px);
+}
+
+.aurora-blob-4 {
+  animation: aurora-drift-4 14s ease-in-out infinite;
+  will-change: transform;
+  filter: blur(80px);
+}
+
+/* ── Logo Marquee Scroll ── */
+@keyframes logo-scroll-left {
+  0%   { transform: translateX(0); }
+  100% { transform: translateX(-25%); }
+}
+
+@keyframes logo-scroll-right {
+  0%   { transform: translateX(-25%); }
+  100% { transform: translateX(0); }
+}
+
+.logo-scroll-left {
+  animation: logo-scroll-left 30s linear infinite;
+  will-change: transform;
+}
+
+.logo-scroll-right {
+  animation: logo-scroll-right 30s linear infinite;
+  will-change: transform;
+}

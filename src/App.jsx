@@ -154,61 +154,58 @@ const AnimatedText = ({ text, className = '' }) => {
 // 5. MARQUEE (scroll‑driven horizontal movement)
 // ------------------------------------------------------------
 const Marquee = () => {
-  const sectionRef = useRef(null);
-  const { scrollY } = useScroll();
-  const [offset, setOffset] = useState(0);
+  const logos = [
+    { name: 'Hugging Face', color: '#FFD21E', icon: '🤗' },
+    { name: 'Nano Banana', color: '#FBBF24', icon: '🍌' },
+    { name: 'Gemini', color: '#4285F4', icon: '✦' },
+    { name: 'n8n', color: '#EA4B71', icon: null, text: 'n8n' },
+    { name: 'Google Flow', color: '#34A853', icon: '▶' },
+    { name: 'Antigravity', color: '#8B5CF6', icon: '⬡' },
+    { name: 'Claude Code', color: '#D97757', icon: '◈' },
+    { name: 'ChatGPT', color: '#10A37F', icon: '◉' },
+    { name: 'Hermes Agent', color: '#06B6D4', icon: '⬢' },
+    { name: 'Perplexity', color: '#20B2AA', icon: '◎' },
+    { name: 'Midjourney', color: '#E0E0E0', icon: '◆' },
+    { name: 'Cursor AI', color: '#A78BFA', icon: '▣' },
+    { name: 'Notion AI', color: '#FFFFFF', icon: '◧' },
+  ];
 
-  useEffect(() => {
-    const handleScroll = () => {
-      if (!sectionRef.current) return;
-      const rect = sectionRef.current.getBoundingClientRect();
-      const sectionTop = rect.top + window.scrollY;
-      const scroll = window.scrollY;
-      const windowHeight = window.innerHeight;
-      const rawOffset = (scroll - sectionTop + windowHeight) * 0.3;
-      setOffset(Math.min(Math.max(rawOffset, 0), 600));
-    };
+  // Split into two rows
+  const row1Logos = logos.slice(0, 7);
+  const row2Logos = logos.slice(7);
 
-    window.addEventListener('scroll', handleScroll, { passive: true });
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
+  // Quadruple for seamless looping
+  const row1 = [...row1Logos, ...row1Logos, ...row1Logos, ...row1Logos];
+  const row2 = [...row2Logos, ...row2Logos, ...row2Logos, ...row2Logos];
 
-  // Placeholder images – replace with your own AI tool logos
-  const row1Images = Array.from({ length: 11 }, (_, i) =>
-    `https://picsum.photos/420/270?random=${i + 1}`
+  const LogoCard = ({ logo }) => (
+    <div className="flex-shrink-0 flex items-center gap-2.5 px-5 py-3 rounded-xl bg-white/[0.04] border border-white/[0.08] backdrop-blur-sm hover:bg-white/[0.08] hover:border-white/[0.15] transition-all duration-300 select-none">
+      <span
+        className="text-xl leading-none font-bold"
+        style={{ color: logo.color }}
+      >
+        {logo.icon || logo.text}
+      </span>
+      <span className="text-sm font-semibold text-[#D7E2EA]/80 whitespace-nowrap tracking-wide">
+        {logo.name}
+      </span>
+    </div>
   );
-  const row2Images = Array.from({ length: 10 }, (_, i) =>
-    `https://picsum.photos/420/270?random=${i + 20}`
-  );
-
-  // Triple for seamless looping
-  const row1 = [...row1Images, ...row1Images, ...row1Images];
-  const row2 = [...row2Images, ...row2Images, ...row2Images];
 
   return (
-    <section ref={sectionRef} className="bg-[#111111] py-24 sm:py-32 md:py-40 overflow-hidden">
+    <section className="bg-[#111111] py-12 sm:py-16 md:py-20 overflow-hidden">
       <div className="relative">
-        {/* Row 1 – moves RIGHT */}
-        <div
-          className="flex gap-3 mb-3 will-change-transform"
-          style={{ transform: `translateX(${offset - 200}px)` }}
-        >
-          {row1.map((src, i) => (
-            <div key={i} className="flex-shrink-0 w-[420px] h-[270px] rounded-2xl overflow-hidden">
-              <img src={src} alt="marquee" className="w-full h-full object-cover" loading="lazy" />
-            </div>
+        {/* Row 1 – scrolls LEFT */}
+        <div className="flex gap-4 mb-4 logo-scroll-left">
+          {row1.map((logo, i) => (
+            <LogoCard key={`r1-${i}`} logo={logo} />
           ))}
         </div>
 
-        {/* Row 2 – moves LEFT */}
-        <div
-          className="flex gap-3 will-change-transform"
-          style={{ transform: `translateX(${-offset + 200}px)` }}
-        >
-          {row2.map((src, i) => (
-            <div key={i} className="flex-shrink-0 w-[420px] h-[270px] rounded-2xl overflow-hidden">
-              <img src={src} alt="marquee" className="w-full h-full object-cover" loading="lazy" />
-            </div>
+        {/* Row 2 – scrolls RIGHT */}
+        <div className="flex gap-4 logo-scroll-right">
+          {row2.map((logo, i) => (
+            <LogoCard key={`r2-${i}`} logo={logo} />
           ))}
         </div>
       </div>
@@ -327,11 +324,10 @@ const StickyCardStack = () => {
                       </span>
                       <div className="text-right">
                         <div className="text-sm uppercase tracking-widest text-[#D7E2EA]/60">{mod.who}</div>
-                        <h3 className="text-2xl sm:text-3xl md:text-4xl font-bold text-white mt-1">{mod.title}</h3>
                       </div>
                     </div>
-                    <div className="flex-1 flex items-center justify-center">
-                      <p className="text-[#D7E2EA] text-lg sm:text-xl md:text-2xl max-w-3xl mx-auto text-center leading-relaxed">
+                    <div className="flex-1 flex items-end justify-center pb-6 sm:pb-8">
+                      <p className="text-[#D7E2EA]/75 text-lg sm:text-xl md:text-2xl max-w-3xl mx-auto text-center leading-relaxed">
                         {mod.desc}
                       </p>
                     </div>
@@ -509,74 +505,28 @@ function App() {
     return () => lenis.destroy();
   }, []);
 
-  // Hero canvas – abstract AI visualization
+  // Hero mouse spotlight tracker
+  const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
+  const heroRef = useRef(null);
+
   useEffect(() => {
-    const canvas = document.getElementById('hero-canvas');
-    if (!canvas) return;
-    const ctx = canvas.getContext('2d');
-    let width = window.innerWidth;
-    let height = window.innerHeight;
-
-    const resize = () => {
-      width = window.innerWidth;
-      height = window.innerHeight;
-      canvas.width = width;
-      canvas.height = height;
-    };
-    window.addEventListener('resize', resize);
-    resize();
-
-    const particles = [];
-    const numParticles = 80;
-    for (let i = 0; i < numParticles; i++) {
-      particles.push({
-        x: Math.random() * width,
-        y: Math.random() * height,
-        vx: (Math.random() - 0.5) * 0.5,
-        vy: (Math.random() - 0.5) * 0.5,
-        radius: Math.random() * 2 + 1,
+    const handleMouseMove = (e) => {
+      if (!heroRef.current) return;
+      const rect = heroRef.current.getBoundingClientRect();
+      setMousePos({
+        x: e.clientX - rect.left,
+        y: e.clientY - rect.top,
       });
+    };
+
+    const hero = heroRef.current;
+    if (hero) {
+      hero.addEventListener('mousemove', handleMouseMove);
     }
-
-    const animate = () => {
-      ctx.clearRect(0, 0, width, height);
-      // Draw connections
-      ctx.strokeStyle = 'rgba(59, 130, 246, 0.15)';
-      ctx.lineWidth = 0.5;
-      for (let i = 0; i < particles.length; i++) {
-        for (let j = i + 1; j < particles.length; j++) {
-          const dx = particles[i].x - particles[j].x;
-          const dy = particles[i].y - particles[j].y;
-          const dist = Math.sqrt(dx * dx + dy * dy);
-          if (dist < 150) {
-            ctx.beginPath();
-            ctx.moveTo(particles[i].x, particles[i].y);
-            ctx.lineTo(particles[j].x, particles[j].y);
-            ctx.stroke();
-          }
-        }
-      }
-
-      // Draw particles
-      particles.forEach((p) => {
-        p.x += p.vx;
-        p.y += p.vy;
-        if (p.x < 0) p.x = width;
-        if (p.x > width) p.x = 0;
-        if (p.y < 0) p.y = height;
-        if (p.y > height) p.y = 0;
-        ctx.beginPath();
-        ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
-        ctx.fillStyle = 'rgba(59, 130, 246, 0.6)';
-        ctx.fill();
-      });
-
-      requestAnimationFrame(animate);
-    };
-    animate();
-
     return () => {
-      window.removeEventListener('resize', resize);
+      if (hero) {
+        hero.removeEventListener('mousemove', handleMouseMove);
+      }
     };
   }, []);
 
@@ -673,9 +623,41 @@ function App() {
       {/* ------------------------------------------------------------
           HERO SECTION
           ------------------------------------------------------------ */}
-      <section className="relative min-h-screen flex flex-col justify-center items-center py-28 md:py-36 overflow-hidden">
-        {/* Canvas background */}
-        <canvas id="hero-canvas" className="absolute inset-0 w-full h-full pointer-events-none" />
+      <section ref={heroRef} className="relative min-h-screen flex flex-col justify-center items-center py-28 md:py-36 overflow-hidden">
+        {/* Aurora Gradient Mesh Background */}
+        <div className="absolute inset-0 overflow-hidden pointer-events-none">
+          {/* Base gradient */}
+          <div className="absolute inset-0 bg-gradient-to-b from-[#0a0a1a] via-[#111111] to-[#111111]" />
+
+          {/* Aurora blob 1 – large blue */}
+          <div className="aurora-blob-1 absolute w-[600px] h-[600px] md:w-[900px] md:h-[900px] rounded-full opacity-[0.12]" 
+               style={{ background: 'radial-gradient(circle, rgba(59,130,246,0.8) 0%, rgba(59,130,246,0) 70%)', top: '-15%', left: '-10%' }} />
+
+          {/* Aurora blob 2 – purple/violet */}
+          <div className="aurora-blob-2 absolute w-[500px] h-[500px] md:w-[800px] md:h-[800px] rounded-full opacity-[0.10]" 
+               style={{ background: 'radial-gradient(circle, rgba(139,92,246,0.8) 0%, rgba(139,92,246,0) 70%)', top: '10%', right: '-15%' }} />
+
+          {/* Aurora blob 3 – cyan/teal */}
+          <div className="aurora-blob-3 absolute w-[400px] h-[400px] md:w-[700px] md:h-[700px] rounded-full opacity-[0.10]" 
+               style={{ background: 'radial-gradient(circle, rgba(6,182,212,0.8) 0%, rgba(6,182,212,0) 70%)', bottom: '5%', left: '20%' }} />
+
+          {/* Aurora blob 4 – deep indigo accent */}
+          <div className="aurora-blob-4 absolute w-[350px] h-[350px] md:w-[600px] md:h-[600px] rounded-full opacity-[0.08]" 
+               style={{ background: 'radial-gradient(circle, rgba(99,102,241,0.8) 0%, rgba(99,102,241,0) 70%)', top: '40%', left: '50%' }} />
+
+          {/* Mouse-following spotlight */}
+          <div
+            className="absolute w-[600px] h-[600px] md:w-[800px] md:h-[800px] rounded-full transition-all duration-300 ease-out pointer-events-none"
+            style={{
+              background: 'radial-gradient(circle, rgba(59,130,246,0.1) 0%, rgba(139,92,246,0.05) 30%, transparent 70%)',
+              left: mousePos.x - 400,
+              top: mousePos.y - 400,
+            }}
+          />
+
+          {/* Subtle noise texture overlay */}
+          <div className="absolute inset-0 opacity-[0.03]" style={{ backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E")` }} />
+        </div>
 
         <div className="relative z-10 text-center max-w-5xl mx-auto px-5 sm:px-8 flex flex-col items-center">
           <FadeIn delay={0} y={-20}>
