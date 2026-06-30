@@ -98,11 +98,11 @@
 }
 
 .logo-scroll-left {
-  animation: logo-scroll-left 30s linear infinite;
+  animation: logo-scroll-left 15s linear infinite;
   will-change: transform;
 }
 
 .logo-scroll-right {
-  animation: logo-scroll-right 30s linear infinite;
+  animation: logo-scroll-right 15s linear infinite;
   will-change: transform;
 }
