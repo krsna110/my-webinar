@@ -314,7 +314,7 @@ const StickyCardStack = () => {
                     src={mod.bgImage}
                     alt=""
                     aria-hidden="true"
-                    className="absolute inset-0 w-full h-full object-cover opacity-50 pointer-events-none select-none"
+                    className="absolute inset-0 w-full h-full object-cover opacity-100 pointer-events-none select-none"
                   />
                   {/* Card content sits above the image */}
                   <div className="relative z-10 w-full h-full p-6 sm:p-8 md:p-10 flex flex-col">

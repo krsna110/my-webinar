@@ -6,10 +6,12 @@
   html {
     scroll-behavior: smooth;
   }
+
   body {
     @apply bg-[#111111] text-white font-['Plus_Jakarta_Sans'];
     cursor: none;
   }
+
   * {
     @apply box-border m-0 p-0;
   }
@@ -19,6 +21,7 @@
   0% {
     transform: translateX(0);
   }
+
   100% {
     transform: translateX(-50%);
   }
@@ -30,36 +33,88 @@
 
 .video-glow {
   box-shadow: 0 0 40px rgba(59, 130, 246, 0.15),
-              0 0 80px rgba(59, 130, 246, 0.08);
+    0 0 80px rgba(59, 130, 246, 0.08);
 }
 
 /* ── Aurora Gradient Mesh Animations ── */
 @keyframes aurora-drift-1 {
-  0%, 100% { transform: translate(0, 0) scale(1); }
-  25%      { transform: translate(80px, 40px) scale(1.1); }
-  50%      { transform: translate(-30px, 80px) scale(0.95); }
-  75%      { transform: translate(-60px, -20px) scale(1.05); }
+
+  0%,
+  100% {
+    transform: translate(0, 0) scale(1);
+  }
+
+  25% {
+    transform: translate(80px, 40px) scale(1.1);
+  }
+
+  50% {
+    transform: translate(-30px, 80px) scale(0.95);
+  }
+
+  75% {
+    transform: translate(-60px, -20px) scale(1.05);
+  }
 }
 
 @keyframes aurora-drift-2 {
-  0%, 100% { transform: translate(0, 0) scale(1); }
-  25%      { transform: translate(-70px, 60px) scale(1.08); }
-  50%      { transform: translate(50px, -40px) scale(1.12); }
-  75%      { transform: translate(30px, 70px) scale(0.92); }
+
+  0%,
+  100% {
+    transform: translate(0, 0) scale(1);
+  }
+
+  25% {
+    transform: translate(-70px, 60px) scale(1.08);
+  }
+
+  50% {
+    transform: translate(50px, -40px) scale(1.12);
+  }
+
+  75% {
+    transform: translate(30px, 70px) scale(0.92);
+  }
 }
 
 @keyframes aurora-drift-3 {
-  0%, 100% { transform: translate(0, 0) scale(1); }
-  25%      { transform: translate(60px, -50px) scale(1.1); }
-  50%      { transform: translate(-80px, 30px) scale(0.98); }
-  75%      { transform: translate(40px, 60px) scale(1.06); }
+
+  0%,
+  100% {
+    transform: translate(0, 0) scale(1);
+  }
+
+  25% {
+    transform: translate(60px, -50px) scale(1.1);
+  }
+
+  50% {
+    transform: translate(-80px, 30px) scale(0.98);
+  }
+
+  75% {
+    transform: translate(40px, 60px) scale(1.06);
+  }
 }
 
 @keyframes aurora-drift-4 {
-  0%, 100% { transform: translate(0, 0) scale(1); }
-  25%      { transform: translate(-50px, -40px) scale(1.15); }
-  50%      { transform: translate(70px, 50px) scale(0.9); }
-  75%      { transform: translate(-30px, 30px) scale(1.08); }
+
+  0%,
+  100% {
+    transform: translate(0, 0) scale(1);
+  }
+
+  25% {
+    transform: translate(-50px, -40px) scale(1.15);
+  }
+
+  50% {
+    transform: translate(70px, 50px) scale(0.9);
+  }
+
+  75% {
+    transform: translate(-30px, 30px) scale(1.08);
+  }
 }
 
 .aurora-blob-1 {
@@ -88,13 +143,23 @@
 
 /* ── Logo Marquee Scroll ── */
 @keyframes logo-scroll-left {
-  0%   { transform: translateX(0); }
-  100% { transform: translateX(-25%); }
+  0% {
+    transform: translateX(0);
+  }
+
+  100% {
+    transform: translateX(-25%);
+  }
 }
 
 @keyframes logo-scroll-right {
-  0%   { transform: translateX(-25%); }
-  100% { transform: translateX(0); }
+  0% {
+    transform: translateX(-25%);
+  }
+
+  100% {
+    transform: translateX(0);
+  }
 }
 
 .logo-scroll-left {
