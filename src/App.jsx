@@ -271,6 +271,13 @@ const StickyCardStack = () => {
       who: 'For everyone wanting to earn',
       bgImage: `${BASE}module-06.png`,
     },
+    {
+      id: '07',
+      title: 'AI Agents — Autonomous Systems',
+      desc: 'Build and deploy autonomous AI agents that perform multi-step tasks, research, and automate operations for your business.',
+      who: 'For future-focused builders',
+      bgImage: `${BASE}module-07.png`,
+    },
   ];
 
   const totalCards = modules.length;
@@ -698,7 +705,7 @@ function App() {
 
           <FadeIn delay={0.35} y={20} className="mt-6">
             <p className="text-[#D7E2EA]/80 text-base sm:text-lg md:text-xl max-w-3xl mx-auto leading-relaxed font-medium">
-              6 high-income AI skills. One live session. Zero technical background needed. Learn what's actually working – from someone who uses it daily.
+              7 high-income AI skills. One live session. Zero technical background needed. Learn what's actually working – from someone who uses it daily.
             </p>
           </FadeIn>
 
