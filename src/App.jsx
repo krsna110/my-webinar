@@ -481,7 +481,115 @@ const FAQItem = ({ question, answer, isOpen, toggle }) => {
 };
 
 // ------------------------------------------------------------
-// 10. MAIN APP
+// 10. COMPARISON SECTION
+// ------------------------------------------------------------
+const ComparisonSection = () => {
+  const negativeItems = [
+    "Pre-recorded videos you'll never finish",
+    'Slide decks about tools you never open',
+    '"Use ChatGPT to write emails" — that\'s it',
+    'No accountability, no project, no proof',
+    'Instructor who has never built anything outside the course',
+  ];
+
+  const positiveItems = [
+    'Live, 4-hour, build-alongside session',
+    '20+ tools demoed hands-on, not in theory',
+    'You leave with a real AI project (website / video / pitch / app)',
+    'Same workflows used at Slay Media for real client work',
+    'Taught by someone running a 25-person AI-first agency',
+  ];
+
+  return (
+    <section className="relative bg-[#111111] py-20 sm:py-24 md:py-32 px-5 sm:px-8 md:px-10 overflow-hidden">
+      {/* Large watermark text behind the headline */}
+      <div className="absolute left-0 top-1/2 -translate-y-1/2 pointer-events-none select-none comparison-watermark">
+        <span className="text-[16rem] sm:text-[20rem] md:text-[26rem] font-black text-white/[0.03] leading-none block">
+          AI
+        </span>
+      </div>
+
+      {/* Subtle blue glow on the right (matching existing blue accent) */}
+      <div
+        className="absolute top-0 right-0 w-[500px] h-full pointer-events-none opacity-[0.06]"
+        style={{
+          background:
+            'radial-gradient(ellipse at 80% 50%, rgba(59,130,246,0.6) 0%, transparent 70%)',
+        }}
+      />
+
+      <div className="max-w-7xl mx-auto relative z-10">
+        <div className="grid grid-cols-1 lg:grid-cols-[1.1fr_1fr_1fr] gap-8 lg:gap-10 items-start">
+          {/* Left Column — Headline */}
+          <FadeIn className="flex flex-col justify-center">
+            <h2 className="text-3xl sm:text-4xl md:text-5xl font-black text-white leading-[1.15]">
+              There are{' '}
+              <span className="text-blue-400 italic">1,000 AI courses.</span>{' '}
+              Almost none make you actually{' '}
+              <span className="text-blue-400 italic">Ship</span>{' '}
+              something.
+            </h2>
+            <p className="text-[#D7E2EA]/50 text-sm sm:text-base mt-6 leading-relaxed max-w-md">
+              Most AI content teaches you concepts. You leave with notes and
+              tab-fatigue. This masterclass is different by design.
+            </p>
+          </FadeIn>
+
+          {/* Center Card — Negative */}
+          <FadeIn delay={0.15} y={20}>
+            <div className="bg-[#1a1a1a] border border-[#2a2a2a] rounded-2xl p-6 sm:p-8 h-full hover:border-[#3a3a3a] transition-colors duration-300">
+              <h3 className="text-white text-lg sm:text-xl font-bold mb-6">
+                Watch. Take notes. Forget.
+              </h3>
+              <ul className="space-y-4">
+                {negativeItems.map((item, i) => (
+                  <li key={i} className="flex items-start gap-3">
+                    <span className="text-red-400 mt-0.5 flex-shrink-0 text-sm font-bold">
+                      ✕
+                    </span>
+                    <span className="text-[#D7E2EA]/60 text-sm leading-relaxed">
+                      {item}
+                    </span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </FadeIn>
+
+          {/* Right Card — Positive */}
+          <FadeIn delay={0.3} y={20}>
+            <div className="bg-[#1a1a1a] border border-blue-500/20 rounded-2xl p-6 sm:p-8 h-full hover:border-blue-500/40 transition-colors duration-300 relative overflow-hidden">
+              {/* Subtle inner glow for the "good" card */}
+              <div
+                className="absolute inset-0 pointer-events-none opacity-[0.04]"
+                style={{
+                  background:
+                    'radial-gradient(ellipse at 50% 0%, rgba(59,130,246,0.8) 0%, transparent 60%)',
+                }}
+              />
+              <h3 className="relative text-white text-lg sm:text-xl font-bold mb-6">
+                Build. Ship. Have something to show
+              </h3>
+              <ul className="relative space-y-4">
+                {positiveItems.map((item, i) => (
+                  <li key={i} className="flex items-start gap-3">
+                    <CheckCircle className="w-4 h-4 text-blue-400 mt-0.5 flex-shrink-0" />
+                    <span className="text-[#D7E2EA]/70 text-sm leading-relaxed">
+                      {item}
+                    </span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </FadeIn>
+        </div>
+      </div>
+    </section>
+  );
+};
+
+// ------------------------------------------------------------
+// 11. MAIN APP
 // ------------------------------------------------------------
 function App() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -736,6 +844,11 @@ function App() {
           MARQUEE
           ------------------------------------------------------------ */}
       <Marquee />
+
+      {/* ------------------------------------------------------------
+          COMPARISON SECTION (Why This Is Different)
+          ------------------------------------------------------------ */}
+      <ComparisonSection />
 
       {/* ------------------------------------------------------------
           PROBLEM SECTION

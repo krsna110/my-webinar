@@ -171,3 +171,10 @@
   animation: logo-scroll-right 15s linear infinite;
   will-change: transform;
 }
+
+/* ── Comparison Section Watermark ── */
+.comparison-watermark {
+  z-index: 0;
+  user-select: none;
+  line-height: 0.8;
+}
