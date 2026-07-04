@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef, useMemo, useCallback } from 'react';
-import { motion, useScroll, useTransform, useInView } from 'framer-motion';
+import { motion, useScroll, useTransform, useInView, AnimatePresence } from 'framer-motion';
 import Lenis from 'lenis';
 import {
   Menu, X, ChevronDown, ChevronRight, Star,
@@ -493,11 +493,11 @@ const ComparisonSection = () => {
   ];
 
   const positiveItems = [
-    'Live, 4-hour, build-alongside session',
-    '20+ tools demoed hands-on, not in theory',
-    'You leave with a real AI project (website / video / pitch / app)',
-    'Same workflows used at Slay Media for real client work',
-    'Taught by someone running a 25-person AI-first agency',
+    'Live, 2-hour, build-alongside session',
+    '10+ tools demoed hands-on, not in theory',
+    'You leave with a real AI project (website / video / pitch )',
+    'Same workflows used at TheAdsLancer for real client work',
+    'Taught by someone running a 15+-person AI-first agency',
   ];
 
   return (
@@ -589,7 +589,212 @@ const ComparisonSection = () => {
 };
 
 // ------------------------------------------------------------
-// 11. MAIN APP
+// 11. ANNOUNCEMENT BANNER (sticky bottom)
+// ------------------------------------------------------------
+const AnnouncementBanner = () => {
+  const [isVisible, setIsVisible] = useState(false);
+  const [isDismissed, setIsDismissed] = useState(false);
+
+  useEffect(() => {
+    const timer = setTimeout(() => setIsVisible(true), 2000);
+    return () => clearTimeout(timer);
+  }, []);
+
+  if (isDismissed) return null;
+
+  return (
+    <AnimatePresence>
+      {isVisible && (
+        <motion.div
+          initial={{ y: 100, opacity: 0 }}
+          animate={{ y: 0, opacity: 1 }}
+          exit={{ y: 100, opacity: 0 }}
+          transition={{ type: 'spring', damping: 20, stiffness: 300 }}
+          className="fixed bottom-0 left-0 w-full z-50"
+        >
+          {/* Outer glow */}
+          <div className="absolute -top-4 left-0 w-full h-8 bg-gradient-to-t from-blue-500/10 to-transparent pointer-events-none" />
+
+          <div className="relative bg-[#161616]/95 backdrop-blur-xl border-t border-blue-500/20 overflow-hidden">
+            {/* Animated shimmer sweep */}
+            <motion.div
+              className="absolute inset-0 pointer-events-none"
+              style={{
+                background:
+                  'linear-gradient(90deg, transparent 0%, rgba(59,130,246,0.08) 50%, transparent 100%)',
+                width: '200%',
+              }}
+              animate={{ x: ['-100%', '100%'] }}
+              transition={{
+                duration: 3,
+                repeat: Infinity,
+                ease: 'linear',
+                repeatDelay: 2,
+              }}
+            />
+
+            <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-8 py-3 sm:py-4 flex items-center justify-between gap-4">
+              {/* Left: Announcement text */}
+              <div className="flex items-center gap-3 sm:gap-4 flex-1 min-w-0">
+                {/* Pulsing live dot */}
+                <span className="relative flex-shrink-0">
+                  <span className="absolute inline-flex h-3 w-3 rounded-full bg-blue-400 opacity-75 animate-ping" />
+                  <span className="relative inline-flex h-3 w-3 rounded-full bg-blue-500" />
+                </span>
+
+                <p className="text-[#D7E2EA] text-sm sm:text-base font-medium truncate">
+                  <span className="hidden sm:inline">🔴 Live Webinar · </span>
+                  <span className="text-white font-bold">Only ₹9</span>
+                  <span className="hidden md:inline"> · Seats are filling fast — don't miss out!</span>
+                  <span className="inline md:hidden"> · Seats filling fast!</span>
+                </p>
+              </div>
+
+              {/* Right: CTA + Close */}
+              <div className="flex items-center gap-3 flex-shrink-0">
+                {/* Pulsing-glow CTA button */}
+                <motion.a
+                  href={RAZORPAY_URL}
+                  className="relative bg-blue-600 hover:bg-blue-700 text-white font-bold text-sm sm:text-base px-5 sm:px-7 py-2 sm:py-2.5 rounded-full transition-colors shadow-lg shadow-blue-500/25"
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.97 }}
+                >
+                  {/* Glow ring pulse */}
+                  <motion.span
+                    className="absolute inset-0 rounded-full border-2 border-blue-400/60"
+                    animate={{ scale: [1, 1.15, 1], opacity: [0.6, 0, 0.6] }}
+                    transition={{ duration: 2, repeat: Infinity, ease: 'easeInOut' }}
+                  />
+                  Register ₹9
+                </motion.a>
+
+                {/* Dismiss button */}
+                <button
+                  onClick={() => {
+                    setIsVisible(false);
+                    setTimeout(() => setIsDismissed(true), 300);
+                  }}
+                  className="text-[#D7E2EA]/40 hover:text-white transition-colors p-1"
+                  aria-label="Dismiss announcement"
+                >
+                  <X className="w-5 h-5" />
+                </button>
+              </div>
+            </div>
+          </div>
+        </motion.div>
+      )}
+    </AnimatePresence>
+  );
+};
+
+// ------------------------------------------------------------
+// 12. TAKEAWAYS SECTION
+// ------------------------------------------------------------
+const TakeawaysSection = () => {
+  const takeaways = [
+    {
+      icon: '20+',
+      title: 'AI Tools, Demoed',
+      desc: 'A working tour of the tools that matter \u2014 ChatGPT, Perplexity, Runway, Midjourney, Leonardo, and more. Enough to know which one to open for which job.',
+      highlighted: false,
+    },
+    {
+      icon: 'Q&A',
+      title: 'Live, with a human',
+      desc: 'Ask anything during the call. Real answers from someone who uses this stack for client work \u2014 not a pre-recorded video pretending to be live.',
+      highlighted: false,
+    },
+    {
+      icon: 'PDF',
+      title: "A Resource Pack you'll actually open",
+      desc: 'Prompts, tool shortlist, and workflows we use at TheAdsLancer \u2014 sent after the class. Bookmark it, share it, come back to it.',
+      highlighted: false,
+    },
+    {
+      icon: '\u221E',
+      title: 'A Productivity Lift',
+      desc: 'A handful of workflows you can plug into your week immediately. Not life-changing \u2014 just hours-saving.',
+      highlighted: false,
+    },
+    {
+      icon: 'AI+',
+      title: 'A Sense of the Possible',
+      desc: "A clear-eyed look at image gen, video gen, no-code builders, and AI decks. You won't master them in 2 hours \u2014 but you'll know exactly what's worth learning deeper, and what isn't.",
+      highlighted: true,
+    },
+    {
+      icon: '\uD83C\uDFC6',
+      title: 'A Certificate of Attendance',
+      desc: "Proof you showed up. Drop it on LinkedIn if it helps \u2014 it signals you're paying attention to where work is going.",
+      highlighted: false,
+    },
+  ];
+
+  return (
+    <section className="bg-[#111111] py-20 sm:py-24 md:py-32 px-5 sm:px-8 md:px-10">
+      <div className="max-w-6xl mx-auto">
+        {/* Section header */}
+        <FadeIn>
+          <p className="text-blue-400 font-semibold uppercase tracking-wider text-sm flex items-center gap-2">
+            <span className="w-6 h-px bg-blue-400 inline-block" />
+            TAKEAWAYS
+          </p>
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-white mt-3 max-w-xl">
+            What you'll{' '}
+            <span className="text-blue-400 italic">gain</span>{' '}
+            from this masterclass
+          </h2>
+        </FadeIn>
+
+        {/* Card Grid */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-0.5 mt-12 rounded-2xl overflow-hidden">
+          {takeaways.map((item, i) => (
+            <FadeIn key={i} delay={i * 0.08} y={15}>
+              <div
+                className={`group p-6 sm:p-8 h-full transition-all duration-300 ${
+                  item.highlighted
+                    ? 'bg-blue-600 text-white hover:bg-blue-500'
+                    : 'bg-[#1a1a1a] text-[#D7E2EA] hover:bg-blue-600 hover:text-white'
+                }`}
+              >
+                {/* Large icon/text */}
+                <div
+                  className={`text-4xl sm:text-5xl font-black leading-none mb-4 transition-colors duration-300 ${
+                    item.highlighted ? 'text-white' : 'text-blue-400 group-hover:text-white'
+                  }`}
+                >
+                  {item.icon}
+                </div>
+
+                {/* Subtitle */}
+                <h3
+                  className={`text-base sm:text-lg font-bold mb-3 transition-colors duration-300 ${
+                    item.highlighted ? 'text-white' : 'text-white'
+                  }`}
+                >
+                  {item.title}
+                </h3>
+
+                {/* Description */}
+                <p
+                  className={`text-sm leading-relaxed transition-colors duration-300 ${
+                    item.highlighted ? 'text-white/85' : 'text-[#D7E2EA]/60 group-hover:text-white/85'
+                  }`}
+                >
+                  {item.desc}
+                </p>
+              </div>
+            </FadeIn>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+};
+
+// ------------------------------------------------------------
+// 13. MAIN APP
 // ------------------------------------------------------------
 function App() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -672,6 +877,7 @@ function App() {
   return (
     <div className="bg-[#111111] text-white font-['Plus_Jakarta_Sans'] overflow-x-clip">
       <CustomCursor />
+      <AnnouncementBanner />
 
       {/* Scrolling Ticker Bar */}
       <div className="fixed top-0 left-0 w-full z-50 bg-[#161616] border-b border-blue-500/20 py-2.5 overflow-hidden select-none">
@@ -738,20 +944,20 @@ function App() {
           <div className="absolute inset-0 bg-gradient-to-b from-[#0a0a1a] via-[#111111] to-[#111111]" />
 
           {/* Aurora blob 1 – large blue */}
-          <div className="aurora-blob-1 absolute w-[600px] h-[600px] md:w-[900px] md:h-[900px] rounded-full opacity-[0.12]" 
-               style={{ background: 'radial-gradient(circle, rgba(59,130,246,0.8) 0%, rgba(59,130,246,0) 70%)', top: '-15%', left: '-10%' }} />
+          <div className="aurora-blob-1 absolute w-[600px] h-[600px] md:w-[900px] md:h-[900px] rounded-full opacity-[0.12]"
+            style={{ background: 'radial-gradient(circle, rgba(59,130,246,0.8) 0%, rgba(59,130,246,0) 70%)', top: '-15%', left: '-10%' }} />
 
           {/* Aurora blob 2 – purple/violet */}
-          <div className="aurora-blob-2 absolute w-[500px] h-[500px] md:w-[800px] md:h-[800px] rounded-full opacity-[0.10]" 
-               style={{ background: 'radial-gradient(circle, rgba(139,92,246,0.8) 0%, rgba(139,92,246,0) 70%)', top: '10%', right: '-15%' }} />
+          <div className="aurora-blob-2 absolute w-[500px] h-[500px] md:w-[800px] md:h-[800px] rounded-full opacity-[0.10]"
+            style={{ background: 'radial-gradient(circle, rgba(139,92,246,0.8) 0%, rgba(139,92,246,0) 70%)', top: '10%', right: '-15%' }} />
 
           {/* Aurora blob 3 – cyan/teal */}
-          <div className="aurora-blob-3 absolute w-[400px] h-[400px] md:w-[700px] md:h-[700px] rounded-full opacity-[0.10]" 
-               style={{ background: 'radial-gradient(circle, rgba(6,182,212,0.8) 0%, rgba(6,182,212,0) 70%)', bottom: '5%', left: '20%' }} />
+          <div className="aurora-blob-3 absolute w-[400px] h-[400px] md:w-[700px] md:h-[700px] rounded-full opacity-[0.10]"
+            style={{ background: 'radial-gradient(circle, rgba(6,182,212,0.8) 0%, rgba(6,182,212,0) 70%)', bottom: '5%', left: '20%' }} />
 
           {/* Aurora blob 4 – deep indigo accent */}
-          <div className="aurora-blob-4 absolute w-[350px] h-[350px] md:w-[600px] md:h-[600px] rounded-full opacity-[0.08]" 
-               style={{ background: 'radial-gradient(circle, rgba(99,102,241,0.8) 0%, rgba(99,102,241,0) 70%)', top: '40%', left: '50%' }} />
+          <div className="aurora-blob-4 absolute w-[350px] h-[350px] md:w-[600px] md:h-[600px] rounded-full opacity-[0.08]"
+            style={{ background: 'radial-gradient(circle, rgba(99,102,241,0.8) 0%, rgba(99,102,241,0) 70%)', top: '40%', left: '50%' }} />
 
           {/* Mouse-following spotlight */}
           <div
@@ -928,6 +1134,11 @@ function App() {
       <section id="modules" className="bg-[#111111]">
         <StickyCardStack />
       </section>
+
+      {/* ------------------------------------------------------------
+          TAKEAWAYS (What You'll Gain)
+          ------------------------------------------------------------ */}
+      <TakeawaysSection />
 
       {/* ------------------------------------------------------------
           REAL OUTCOMES
