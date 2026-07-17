@@ -695,38 +695,38 @@ const TakeawaysSection = () => {
   const takeaways = [
     {
       icon: '20+',
-      title: 'AI Tools, Demoed',
-      desc: 'A working tour of the tools that matter \u2014 ChatGPT, Perplexity, Runway, Midjourney, Leonardo, and more. Enough to know which one to open for which job.',
+      title: 'AI Tools, Live in Action',
+      desc: 'ChatGPT, Perplexity, Runway, Midjourney, and more — a working tour showing exactly which tool to open for which job. No more confusion, pure clarity.',
       highlighted: false,
     },
     {
       icon: 'Q&A',
-      title: 'Live, with a human',
-      desc: 'Ask anything during the call. Real answers from someone who uses this stack for client work \u2014 not a pre-recorded video pretending to be live.',
+      title: 'Live, with a Real Human',
+      desc: 'Ask anything during the call. Real answers from someone who uses this stack daily for client work — not a pre-recorded video pretending to be live.',
       highlighted: false,
     },
     {
       icon: 'PDF',
-      title: "A Resource Pack you'll actually open",
-      desc: 'Prompts, tool shortlist, and workflows we use at TheAdsLancer \u2014 sent after the class. Bookmark it, share it, come back to it.',
+      title: "Resource Pack You'll Actually Open",
+      desc: 'Prompts, tool shortlists, and the workflows Pranshul uses in his agency — sent after the session. Bookmark it, share it, refer back to it.',
       highlighted: false,
     },
     {
-      icon: '\u221E',
-      title: 'A Productivity Lift',
-      desc: 'A handful of workflows you can plug into your week immediately. Not life-changing \u2014 just hours-saving.',
+      icon: '∞',
+      title: 'An Immediate Productivity Lift',
+      desc: 'A handful of workflows you can plug into your week immediately. Not life-changing — just saving you hours.',
       highlighted: false,
     },
     {
       icon: 'AI+',
-      title: 'A Sense of the Possible',
-      desc: "A clear-eyed look at image gen, video gen, no-code builders, and AI decks. You won't master them in 2 hours \u2014 but you'll know exactly what's worth learning deeper, and what isn't.",
-      highlighted: true,
+      title: 'A Sense of "What is Possible"',
+      desc: "A clear-eyed look at image gen, video gen, no-code builders, and AI decks. You won't master them in 2 hours — but you'll know exactly what's worth learning deeper, and what isn't.",
+      highlighted: 'gold',
     },
     {
-      icon: '\uD83C\uDFC6',
-      title: 'A Certificate of Attendance',
-      desc: "Proof you showed up. Drop it on LinkedIn if it helps \u2014 it signals you're paying attention to where work is going.",
+      icon: '🏆',
+      title: 'Certificate of Attendance',
+      desc: "Proof that you showed up. Post it on LinkedIn if it helps — signaling that you're paying attention to where work is heading.",
       highlighted: false,
     },
   ];
@@ -753,7 +753,9 @@ const TakeawaysSection = () => {
             <FadeIn key={i} delay={i * 0.08} y={15}>
               <div
                 className={`group p-6 sm:p-8 h-full transition-all duration-300 ${
-                  item.highlighted
+                  item.highlighted === 'gold'
+                    ? 'bg-gradient-to-br from-amber-400 via-amber-500 to-yellow-600 text-slate-950 shadow-xl shadow-amber-500/10 hover:brightness-105'
+                    : item.highlighted
                     ? 'bg-blue-600 text-white hover:bg-blue-500'
                     : 'bg-[#1a1a1a] text-[#D7E2EA] hover:bg-blue-600 hover:text-white'
                 }`}
@@ -761,7 +763,11 @@ const TakeawaysSection = () => {
                 {/* Large icon/text */}
                 <div
                   className={`text-4xl sm:text-5xl font-black leading-none mb-4 transition-colors duration-300 ${
-                    item.highlighted ? 'text-white' : 'text-blue-400 group-hover:text-white'
+                    item.highlighted === 'gold'
+                      ? 'text-slate-950'
+                      : item.highlighted
+                      ? 'text-white'
+                      : 'text-blue-400 group-hover:text-white'
                   }`}
                 >
                   {item.icon}
@@ -770,7 +776,9 @@ const TakeawaysSection = () => {
                 {/* Subtitle */}
                 <h3
                   className={`text-base sm:text-lg font-bold mb-3 transition-colors duration-300 ${
-                    item.highlighted ? 'text-white' : 'text-white'
+                    item.highlighted === 'gold'
+                      ? 'text-slate-950'
+                      : 'text-white'
                   }`}
                 >
                   {item.title}
@@ -779,7 +787,11 @@ const TakeawaysSection = () => {
                 {/* Description */}
                 <p
                   className={`text-sm leading-relaxed transition-colors duration-300 ${
-                    item.highlighted ? 'text-white/85' : 'text-[#D7E2EA]/60 group-hover:text-white/85'
+                    item.highlighted === 'gold'
+                      ? 'text-slate-900/90'
+                      : item.highlighted
+                      ? 'text-white/85'
+                      : 'text-[#D7E2EA]/60 group-hover:text-white/85'
                   }`}
                 >
                   {item.desc}
@@ -794,7 +806,56 @@ const TakeawaysSection = () => {
 };
 
 // ------------------------------------------------------------
-// 13. MAIN APP
+// 13. STARFIELD BACKGROUND (pure CSS twinkling stars + parallax)
+// ------------------------------------------------------------
+const StarfieldBackground = () => {
+  // Generate random star positions once
+  const layers = useMemo(() => {
+    const createStars = (count, sizeRange, opacityRange) =>
+      Array.from({ length: count }, (_, i) => ({
+        id: i,
+        x: Math.random() * 100,
+        y: Math.random() * 100,
+        size: sizeRange[0] + Math.random() * (sizeRange[1] - sizeRange[0]),
+        opacity: opacityRange[0] + Math.random() * (opacityRange[1] - opacityRange[0]),
+        delay: Math.random() * 5,
+        duration: 2 + Math.random() * 4,
+      }));
+
+    return [
+      { stars: createStars(80, [0.5, 1.2], [0.3, 0.7]), className: 'starfield-layer-1' },
+      { stars: createStars(40, [1.2, 2.2], [0.4, 0.8]), className: 'starfield-layer-2' },
+      { stars: createStars(15, [2, 3.5], [0.5, 1]),       className: 'starfield-layer-3' },
+    ];
+  }, []);
+
+  return (
+    <div className="fixed inset-0 z-0 pointer-events-none" aria-hidden="true">
+      {layers.map((layer, li) => (
+        <div key={li} className={`absolute inset-0 ${layer.className}`}>
+          {layer.stars.map((s) => (
+            <span
+              key={s.id}
+              className="starfield-star"
+              style={{
+                left: `${s.x}%`,
+                top: `${s.y}%`,
+                width: `${s.size}px`,
+                height: `${s.size}px`,
+                opacity: s.opacity,
+                animationDelay: `${s.delay}s`,
+                animationDuration: `${s.duration}s`,
+              }}
+            />
+          ))}
+        </div>
+      ))}
+    </div>
+  );
+};
+
+// ------------------------------------------------------------
+// 14. MAIN APP
 // ------------------------------------------------------------
 function App() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -876,6 +937,7 @@ function App() {
 
   return (
     <div className="bg-[#111111] text-white font-['Plus_Jakarta_Sans'] overflow-x-clip">
+      <StarfieldBackground />
       <CustomCursor />
       <AnnouncementBanner />
 
