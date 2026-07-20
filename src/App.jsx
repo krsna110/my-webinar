@@ -752,47 +752,43 @@ const TakeawaysSection = () => {
           {takeaways.map((item, i) => (
             <FadeIn key={i} delay={i * 0.08} y={15}>
               <div
-                className={`group p-6 sm:p-8 h-full transition-all duration-300 ${
-                  item.highlighted === 'gold'
+                className={`group p-6 sm:p-8 h-full transition-all duration-300 ${item.highlighted === 'gold'
                     ? 'bg-gradient-to-br from-amber-400 via-amber-500 to-yellow-600 text-slate-950 shadow-xl shadow-amber-500/10 hover:brightness-105'
                     : item.highlighted
-                    ? 'bg-blue-600 text-white hover:bg-blue-500'
-                    : 'bg-[#1a1a1a] text-[#D7E2EA] hover:bg-blue-600 hover:text-white'
-                }`}
+                      ? 'bg-blue-600 text-white hover:bg-blue-500'
+                      : 'bg-[#1a1a1a] text-[#D7E2EA] hover:bg-blue-600 hover:text-white'
+                  }`}
               >
                 {/* Large icon/text */}
                 <div
-                  className={`text-4xl sm:text-5xl font-black leading-none mb-4 transition-colors duration-300 ${
-                    item.highlighted === 'gold'
+                  className={`text-4xl sm:text-5xl font-black leading-none mb-4 transition-colors duration-300 ${item.highlighted === 'gold'
                       ? 'text-slate-950'
                       : item.highlighted
-                      ? 'text-white'
-                      : 'text-blue-400 group-hover:text-white'
-                  }`}
+                        ? 'text-white'
+                        : 'text-blue-400 group-hover:text-white'
+                    }`}
                 >
                   {item.icon}
                 </div>
 
                 {/* Subtitle */}
                 <h3
-                  className={`text-base sm:text-lg font-bold mb-3 transition-colors duration-300 ${
-                    item.highlighted === 'gold'
+                  className={`text-base sm:text-lg font-bold mb-3 transition-colors duration-300 ${item.highlighted === 'gold'
                       ? 'text-slate-950'
                       : 'text-white'
-                  }`}
+                    }`}
                 >
                   {item.title}
                 </h3>
 
                 {/* Description */}
                 <p
-                  className={`text-sm leading-relaxed transition-colors duration-300 ${
-                    item.highlighted === 'gold'
+                  className={`text-sm leading-relaxed transition-colors duration-300 ${item.highlighted === 'gold'
                       ? 'text-slate-900/90'
                       : item.highlighted
-                      ? 'text-white/85'
-                      : 'text-[#D7E2EA]/60 group-hover:text-white/85'
-                  }`}
+                        ? 'text-white/85'
+                        : 'text-[#D7E2EA]/60 group-hover:text-white/85'
+                    }`}
                 >
                   {item.desc}
                 </p>
@@ -825,7 +821,7 @@ const StarfieldBackground = () => {
     return [
       { stars: createStars(80, [0.5, 1.2], [0.3, 0.7]), className: 'starfield-layer-1' },
       { stars: createStars(40, [1.2, 2.2], [0.4, 0.8]), className: 'starfield-layer-2' },
-      { stars: createStars(15, [2, 3.5], [0.5, 1]),       className: 'starfield-layer-3' },
+      { stars: createStars(15, [2, 3.5], [0.5, 1]), className: 'starfield-layer-3' },
     ];
   }, []);
 
@@ -1072,7 +1068,7 @@ function App() {
             <div className="relative aspect-video w-full rounded-2xl md:rounded-[32px] overflow-hidden border border-white/10 video-glow bg-[#1a1a1a]">
               <iframe
                 className="absolute inset-0 w-full h-full"
-                src="https://www.youtube.com/embed/M-NTwkM3VwM?autoplay=0&rel=0"
+                src="https://www.youtube.com/watch?v=EhM2AAyx16M"
                 title="YouTube video player"
                 frameBorder="0"
                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
