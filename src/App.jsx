@@ -939,16 +939,61 @@ function App() {
       <CustomCursor />
       <AnnouncementBanner />
 
-      {/* Scrolling Ticker Bar */}
-      <div className="fixed top-0 left-0 w-full z-50 bg-[#161616] border-b border-blue-500/20 py-2.5 overflow-hidden select-none">
-        <div className="flex whitespace-nowrap ticker-animate">
-          {Array(10).fill("🔴 LIVE WEBINAR · Only ₹9 · Seats Filling Fast").map((text, i) => (
-            <span key={i} className="text-blue-400 font-bold uppercase tracking-wider text-xs md:text-sm mx-6 inline-flex items-center">
-              {text}
-            </span>
-          ))}
-        </div>
-      </div>
+      {/* Sticky Countdown Bar */}
+      {(() => {
+        // ponytail: inline IIFE instead of a separate component — it's one bar
+        const [timeLeft, setTimeLeft] = React.useState({ d: 0, h: 0, m: 0, s: 0 });
+        React.useEffect(() => {
+          const target = new Date('2026-08-02T12:00:00+05:30').getTime();
+          const tick = () => {
+            const diff = Math.max(0, target - Date.now());
+            setTimeLeft({
+              d: Math.floor(diff / 86400000),
+              h: Math.floor((diff % 86400000) / 3600000),
+              m: Math.floor((diff % 3600000) / 60000),
+              s: Math.floor((diff % 60000) / 1000),
+            });
+          };
+          tick();
+          const id = setInterval(tick, 1000);
+          return () => clearInterval(id);
+        }, []);
+        const pad = (n) => String(n).padStart(2, '0');
+        const isLive = timeLeft.d === 0 && timeLeft.h === 0 && timeLeft.m === 0 && timeLeft.s === 0;
+        return (
+          <div className="fixed top-0 left-0 w-full z-50 bg-[#161616]/95 backdrop-blur-md border-b border-blue-500/20 py-2.5 select-none">
+            <div className="max-w-7xl mx-auto px-4 flex items-center justify-center gap-3 sm:gap-6">
+              <span className="text-blue-400 font-bold uppercase tracking-wider text-xs sm:text-sm">
+                {isLive ? '🔴 WEBINAR IS LIVE NOW!' : '🔴 LIVE WEBINAR STARTS IN'}
+              </span>
+              {!isLive && (
+                <div className="flex items-center gap-1.5 sm:gap-2.5">
+                  {[
+                    { val: timeLeft.d, label: 'D' },
+                    { val: timeLeft.h, label: 'H' },
+                    { val: timeLeft.m, label: 'M' },
+                    { val: timeLeft.s, label: 'S' },
+                  ].map((unit, i) => (
+                    <React.Fragment key={unit.label}>
+                      {i > 0 && <span className="text-blue-400/50 font-bold text-sm">:</span>}
+                      <div className="bg-blue-500/15 border border-blue-500/25 rounded-md px-2 py-1 min-w-[36px] sm:min-w-[44px] text-center">
+                        <span className="text-white font-bold text-sm sm:text-base tabular-nums">{pad(unit.val)}</span>
+                        <span className="text-blue-400/60 text-[9px] sm:text-[10px] font-semibold ml-0.5">{unit.label}</span>
+                      </div>
+                    </React.Fragment>
+                  ))}
+                </div>
+              )}
+              <a
+                href={RAZORPAY_URL}
+                className="hidden sm:inline-block bg-blue-600 hover:bg-blue-700 text-white font-bold text-xs px-4 py-1.5 rounded-full transition-colors"
+              >
+                Register ₹9
+              </a>
+            </div>
+          </div>
+        );
+      })()}
 
       {/* Navbar */}
       <nav className="fixed top-9 left-0 w-full z-50 px-4 md:px-10 pt-4 md:pt-6">
