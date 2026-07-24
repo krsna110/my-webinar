@@ -1005,8 +1005,8 @@ function App() {
       })()}
 
       {/* Navbar */}
-      <nav className="fixed top-9 left-0 w-full z-50 px-4 md:px-10 pt-4 md:pt-6">
-        <div className="flex items-center justify-between max-w-7xl mx-auto bg-white/5 backdrop-blur-xl border border-white/10 rounded-full px-6 md:px-8 py-3 shadow-[0_8px_32px_rgba(0,0,0,0.4)]">
+      <nav className="fixed top-11 sm:top-12 left-0 w-full z-40 px-4 md:px-10 pt-1 md:pt-2">
+        <div className="flex items-center justify-between max-w-7xl mx-auto bg-[#161616]/90 backdrop-blur-xl border border-white/10 rounded-full px-6 md:px-8 py-3 shadow-[0_8px_32px_rgba(0,0,0,0.4)]">
           <div className="text-2xl font-bold text-white">PRANSHUL AI<span className="text-blue-400">.</span></div>
 
           {/* Desktop Nav */}
@@ -1035,7 +1035,7 @@ function App() {
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -20 }}
-            className="md:hidden absolute top-full left-4 right-4 mt-2 bg-white/5 backdrop-blur-xl border border-white/10 rounded-2xl p-6 flex flex-col gap-4 shadow-[0_8px_32px_rgba(0,0,0,0.4)]"
+            className="md:hidden absolute top-full left-4 right-4 mt-2 bg-[#161616]/95 backdrop-blur-xl border border-white/10 rounded-2xl p-6 flex flex-col gap-4 shadow-[0_8px_32px_rgba(0,0,0,0.4)]"
           >
             <a href="#problem" className="text-[#D7E2EA] hover:text-blue-400" onClick={() => setIsMenuOpen(false)}>Problem</a>
             <a href="#modules" className="text-[#D7E2EA] hover:text-blue-400" onClick={() => setIsMenuOpen(false)}>Modules</a>
@@ -1051,7 +1051,7 @@ function App() {
       {/* ------------------------------------------------------------
           HERO SECTION
           ------------------------------------------------------------ */}
-      <section ref={heroRef} className="relative min-h-screen flex flex-col justify-center items-center py-28 md:py-36 overflow-hidden">
+      <section ref={heroRef} className="relative min-h-screen flex flex-col justify-center items-center pt-36 sm:pt-40 md:pt-44 pb-20 md:pb-32 overflow-hidden">
         {/* Aurora Gradient Mesh Background */}
         <div className="absolute inset-0 overflow-hidden pointer-events-none">
           {/* Base gradient */}
