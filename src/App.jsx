@@ -1113,8 +1113,22 @@ function App() {
             </p>
           </FadeIn>
 
+          {/* YouTube Video Embed */}
+          <FadeIn delay={0.45} y={30} className="mt-10 w-full max-w-4xl mx-auto px-4">
+            <div className="relative aspect-video w-full rounded-2xl md:rounded-[32px] overflow-hidden border border-white/10 video-glow bg-[#1a1a1a]">
+              <iframe
+                className="absolute inset-0 w-full h-full"
+                src="https://www.youtube.com/embed/EhM2AAyx16M"
+                title="YouTube video player"
+                frameBorder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                allowFullScreen
+              />
+            </div>
+          </FadeIn>
+
           {/* Creative Event Date Card */}
-          <FadeIn delay={0.45} y={20} className="mt-8 w-full max-w-3xl mx-auto px-4">
+          <FadeIn delay={0.55} y={20} className="mt-8 w-full max-w-3xl mx-auto px-4">
             <div className="relative group bg-gradient-to-r from-blue-950/40 via-[#161b26]/70 to-purple-950/40 border border-blue-500/30 rounded-2xl p-4 sm:p-6 backdrop-blur-xl shadow-[0_0_30px_rgba(59,130,246,0.15)] hover:border-blue-400/50 transition-all duration-300">
               <div className="absolute -top-px left-1/2 -translate-x-1/2 w-1/2 h-[2px] bg-gradient-to-r from-transparent via-blue-400 to-transparent" />
               
@@ -1151,20 +1165,6 @@ function App() {
                   <span className="text-cyan-400 text-xs font-medium">Private Stream</span>
                 </div>
               </div>
-            </div>
-          </FadeIn>
-
-          {/* YouTube Video Embed */}
-          <FadeIn delay={0.5} y={30} className="mt-12 w-full max-w-4xl mx-auto px-4">
-            <div className="relative aspect-video w-full rounded-2xl md:rounded-[32px] overflow-hidden border border-white/10 video-glow bg-[#1a1a1a]">
-              <iframe
-                className="absolute inset-0 w-full h-full"
-                src="https://www.youtube.com/embed/EhM2AAyx16M"
-                title="YouTube video player"
-                frameBorder="0"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                allowFullScreen
-              />
             </div>
           </FadeIn>
 
