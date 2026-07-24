@@ -1384,7 +1384,7 @@ function App() {
               <div className="flex flex-wrap gap-6 mt-6 text-sm">
                 <div><span className="text-blue-400 font-bold"><AnimatedCounter target={3200} /></span>+ students trained</div>
                 <div><span className="text-blue-400 font-bold"><AnimatedCounter target={2} /></span>+ years daily AI work</div>
-                <div><span className="text-blue-400 font-bold">AI Content Systems</span> for [X] clients</div>
+                <div><span className="text-blue-400 font-bold"><AnimatedCounter target={1000} />+</span> clients served</div>
               </div>
             </div>
           </div>
