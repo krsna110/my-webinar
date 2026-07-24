@@ -943,115 +943,109 @@ function App() {
       <CustomCursor />
       <AnnouncementBanner />
 
-      {/* Sticky Countdown Bar */}
-      {(() => {
-        // ponytail: inline IIFE instead of a separate component — it's one bar
-        const [timeLeft, setTimeLeft] = React.useState({ d: 0, h: 0, m: 0, s: 0 });
-        React.useEffect(() => {
-          const target = new Date('2026-08-02T12:00:00+05:30').getTime();
-          const tick = () => {
-            const diff = Math.max(0, target - Date.now());
-            setTimeLeft({
-              d: Math.floor(diff / 86400000),
-              h: Math.floor((diff % 86400000) / 3600000),
-              m: Math.floor((diff % 3600000) / 60000),
-              s: Math.floor((diff % 60000) / 1000),
-            });
-          };
-          tick();
-          const id = setInterval(tick, 1000);
-          return () => clearInterval(id);
-        }, []);
-        const pad = (n) => String(n).padStart(2, '0');
-        const isLive = timeLeft.d === 0 && timeLeft.h === 0 && timeLeft.m === 0 && timeLeft.s === 0;
-        return (
-          <div className="fixed top-0 left-0 w-full z-50 bg-[#161616]/95 backdrop-blur-md border-b border-blue-500/20 py-2.5 select-none">
-            <div className="max-w-7xl mx-auto px-4 flex items-center justify-center gap-3 sm:gap-6 flex-wrap sm:flex-nowrap">
-              <div className="flex items-center gap-2">
-                <span className="text-blue-400 font-bold uppercase tracking-wider text-xs sm:text-sm">
-                  {isLive ? '🔴 WEBINAR IS LIVE NOW!' : '🔴 LIVE WEBINAR STARTS IN'}
+      {/* Unified Top Header & Navigation */}
+      <header className="fixed top-0 left-0 w-full z-50">
+        {/* Top Strip: Countdown & Date */}
+        {(() => {
+          const [timeLeft, setTimeLeft] = React.useState({ d: 0, h: 0, m: 0, s: 0 });
+          React.useEffect(() => {
+            const target = new Date('2026-08-02T12:00:00+05:30').getTime();
+            const tick = () => {
+              const diff = Math.max(0, target - Date.now());
+              setTimeLeft({
+                d: Math.floor(diff / 86400000),
+                h: Math.floor((diff % 86400000) / 3600000),
+                m: Math.floor((diff % 3600000) / 60000),
+                s: Math.floor((diff % 60000) / 1000),
+              });
+            };
+            tick();
+            const id = setInterval(tick, 1000);
+            return () => clearInterval(id);
+          }, []);
+          const pad = (n) => String(n).padStart(2, '0');
+          const isLive = timeLeft.d === 0 && timeLeft.h === 0 && timeLeft.m === 0 && timeLeft.s === 0;
+          return (
+            <div className="bg-[#141414]/95 backdrop-blur-md border-b border-blue-500/20 py-1.5 px-4 select-none">
+              <div className="max-w-7xl mx-auto flex items-center justify-center gap-2 sm:gap-4 text-center">
+                <span className="text-blue-400 font-bold uppercase tracking-wider text-[10px] sm:text-xs">
+                  {isLive ? '🔴 WEBINAR IS LIVE NOW!' : '🔴 STARTS IN'}
                 </span>
-                <span className="hidden lg:inline-flex items-center gap-1 bg-blue-500/10 border border-blue-500/20 text-blue-300 text-xs px-2.5 py-0.5 rounded-full font-medium">
-                  🗓️ 2 Aug 2026 · 12 PM IST
+                {!isLive && (
+                  <div className="flex items-center gap-1 sm:gap-1.5">
+                    {[
+                      { val: timeLeft.d, label: 'D' },
+                      { val: timeLeft.h, label: 'H' },
+                      { val: timeLeft.m, label: 'M' },
+                      { val: timeLeft.s, label: 'S' },
+                    ].map((unit, i) => (
+                      <React.Fragment key={unit.label}>
+                        {i > 0 && <span className="text-blue-400/50 font-bold text-xs">:</span>}
+                        <div className="bg-blue-500/15 border border-blue-500/25 rounded px-1.5 py-0.5 min-w-[28px] sm:min-w-[34px] text-center">
+                          <span className="text-white font-bold text-xs sm:text-sm tabular-nums">{pad(unit.val)}</span>
+                          <span className="text-blue-400/70 text-[8px] sm:text-[9px] font-semibold ml-0.5">{unit.label}</span>
+                        </div>
+                      </React.Fragment>
+                    ))}
+                  </div>
+                )}
+                <span className="hidden sm:inline-flex items-center gap-1 bg-blue-500/10 border border-blue-500/20 text-blue-300 text-[11px] px-2 py-0.5 rounded-full font-medium">
+                  🗓️ 2 Aug · 12 PM IST
                 </span>
               </div>
-              {!isLive && (
-                <div className="flex items-center gap-1.5 sm:gap-2.5">
-                  {[
-                    { val: timeLeft.d, label: 'D' },
-                    { val: timeLeft.h, label: 'H' },
-                    { val: timeLeft.m, label: 'M' },
-                    { val: timeLeft.s, label: 'S' },
-                  ].map((unit, i) => (
-                    <React.Fragment key={unit.label}>
-                      {i > 0 && <span className="text-blue-400/50 font-bold text-sm">:</span>}
-                      <div className="bg-blue-500/15 border border-blue-500/25 rounded-md px-2 py-1 min-w-[36px] sm:min-w-[44px] text-center">
-                        <span className="text-white font-bold text-sm sm:text-base tabular-nums">{pad(unit.val)}</span>
-                        <span className="text-blue-400/60 text-[9px] sm:text-[10px] font-semibold ml-0.5">{unit.label}</span>
-                      </div>
-                    </React.Fragment>
-                  ))}
-                </div>
-              )}
-              <a
-                href={RAZORPAY_URL}
-                className="hidden sm:inline-block bg-blue-600 hover:bg-blue-700 text-white font-bold text-xs px-4 py-1.5 rounded-full transition-colors"
-              >
+            </div>
+          );
+        })()}
+
+        {/* Main Navbar Bar */}
+        <div className="px-3 sm:px-6 md:px-10 pt-2 pb-1">
+          <nav className="flex items-center justify-between max-w-7xl mx-auto bg-[#161616]/90 backdrop-blur-xl border border-white/10 rounded-full px-5 sm:px-6 md:px-8 py-2 sm:py-2.5 shadow-[0_8px_32px_rgba(0,0,0,0.4)]">
+            <div className="text-xl sm:text-2xl font-bold text-white">PRANSHUL AI<span className="text-blue-400">.</span></div>
+
+            {/* Desktop Nav */}
+            <div className="hidden md:flex items-center gap-8 text-[#D7E2EA] font-medium uppercase tracking-wider text-sm lg:text-base">
+              <a href="#problem" className="hover:text-blue-400 transition-colors">Problem</a>
+              <a href="#modules" className="hover:text-blue-400 transition-colors">Modules</a>
+              <a href="#trainer" className="hover:text-blue-400 transition-colors">Trainer</a>
+              <a href="#faq" className="hover:text-blue-400 transition-colors">FAQ</a>
+              <a href={RAZORPAY_URL} className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded-full transition-colors">
                 Register ₹9
               </a>
             </div>
-          </div>
-        );
-      })()}
 
-      {/* Navbar */}
-      <nav className="fixed top-11 sm:top-12 left-0 w-full z-40 px-4 md:px-10 pt-1 md:pt-2">
-        <div className="flex items-center justify-between max-w-7xl mx-auto bg-[#161616]/90 backdrop-blur-xl border border-white/10 rounded-full px-6 md:px-8 py-3 shadow-[0_8px_32px_rgba(0,0,0,0.4)]">
-          <div className="text-2xl font-bold text-white">PRANSHUL AI<span className="text-blue-400">.</span></div>
+            {/* Mobile hamburger */}
+            <button
+              className="md:hidden text-white p-1"
+              onClick={() => setIsMenuOpen(!isMenuOpen)}
+            >
+              {isMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+            </button>
+          </nav>
 
-          {/* Desktop Nav */}
-          <div className="hidden md:flex items-center gap-8 text-[#D7E2EA] font-medium uppercase tracking-wider text-sm lg:text-base">
-            <a href="#problem" className="hover:text-blue-400 transition-colors">Problem</a>
-            <a href="#modules" className="hover:text-blue-400 transition-colors">Modules</a>
-            <a href="#trainer" className="hover:text-blue-400 transition-colors">Trainer</a>
-            <a href="#faq" className="hover:text-blue-400 transition-colors">FAQ</a>
-            <a href={RAZORPAY_URL} className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded-full transition-colors">
-              Register ₹9
-            </a>
-          </div>
-
-          {/* Mobile hamburger */}
-          <button
-            className="md:hidden text-white"
-            onClick={() => setIsMenuOpen(!isMenuOpen)}
-          >
-            {isMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
-          </button>
+          {/* Mobile Menu */}
+          {isMenuOpen && (
+            <motion.div
+              initial={{ opacity: 0, y: -10 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -10 }}
+              className="md:hidden max-w-7xl mx-auto mt-2 bg-[#161616]/95 backdrop-blur-xl border border-white/10 rounded-2xl p-6 flex flex-col gap-4 shadow-[0_8px_32px_rgba(0,0,0,0.4)]"
+            >
+              <a href="#problem" className="text-[#D7E2EA] hover:text-blue-400" onClick={() => setIsMenuOpen(false)}>Problem</a>
+              <a href="#modules" className="text-[#D7E2EA] hover:text-blue-400" onClick={() => setIsMenuOpen(false)}>Modules</a>
+              <a href="#trainer" className="text-[#D7E2EA] hover:text-blue-400" onClick={() => setIsMenuOpen(false)}>Trainer</a>
+              <a href="#faq" className="text-[#D7E2EA] hover:text-blue-400" onClick={() => setIsMenuOpen(false)}>FAQ</a>
+              <a href={RAZORPAY_URL} className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded-full text-center transition-colors" onClick={() => setIsMenuOpen(false)}>
+                Register ₹9
+              </a>
+            </motion.div>
+          )}
         </div>
-
-        {/* Mobile Menu */}
-        {isMenuOpen && (
-          <motion.div
-            initial={{ opacity: 0, y: -20 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -20 }}
-            className="md:hidden absolute top-full left-4 right-4 mt-2 bg-[#161616]/95 backdrop-blur-xl border border-white/10 rounded-2xl p-6 flex flex-col gap-4 shadow-[0_8px_32px_rgba(0,0,0,0.4)]"
-          >
-            <a href="#problem" className="text-[#D7E2EA] hover:text-blue-400" onClick={() => setIsMenuOpen(false)}>Problem</a>
-            <a href="#modules" className="text-[#D7E2EA] hover:text-blue-400" onClick={() => setIsMenuOpen(false)}>Modules</a>
-            <a href="#trainer" className="text-[#D7E2EA] hover:text-blue-400" onClick={() => setIsMenuOpen(false)}>Trainer</a>
-            <a href="#faq" className="text-[#D7E2EA] hover:text-blue-400" onClick={() => setIsMenuOpen(false)}>FAQ</a>
-            <a href={RAZORPAY_URL} className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded-full text-center transition-colors" onClick={() => setIsMenuOpen(false)}>
-              Register ₹9
-            </a>
-          </motion.div>
-        )}
-      </nav>
+      </header>
 
       {/* ------------------------------------------------------------
           HERO SECTION
           ------------------------------------------------------------ */}
-      <section ref={heroRef} className="relative min-h-screen flex flex-col justify-center items-center pt-36 sm:pt-40 md:pt-44 pb-20 md:pb-32 overflow-hidden">
+      <section ref={heroRef} className="relative min-h-screen flex flex-col justify-center items-center pt-32 sm:pt-36 md:pt-40 pb-20 md:pb-32 overflow-hidden">
         {/* Aurora Gradient Mesh Background */}
         <div className="absolute inset-0 overflow-hidden pointer-events-none">
           {/* Base gradient */}
