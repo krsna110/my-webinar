@@ -966,10 +966,15 @@ function App() {
         const isLive = timeLeft.d === 0 && timeLeft.h === 0 && timeLeft.m === 0 && timeLeft.s === 0;
         return (
           <div className="fixed top-0 left-0 w-full z-50 bg-[#161616]/95 backdrop-blur-md border-b border-blue-500/20 py-2.5 select-none">
-            <div className="max-w-7xl mx-auto px-4 flex items-center justify-center gap-3 sm:gap-6">
-              <span className="text-blue-400 font-bold uppercase tracking-wider text-xs sm:text-sm">
-                {isLive ? '🔴 WEBINAR IS LIVE NOW!' : '🔴 LIVE WEBINAR STARTS IN'}
-              </span>
+            <div className="max-w-7xl mx-auto px-4 flex items-center justify-center gap-3 sm:gap-6 flex-wrap sm:flex-nowrap">
+              <div className="flex items-center gap-2">
+                <span className="text-blue-400 font-bold uppercase tracking-wider text-xs sm:text-sm">
+                  {isLive ? '🔴 WEBINAR IS LIVE NOW!' : '🔴 LIVE WEBINAR STARTS IN'}
+                </span>
+                <span className="hidden lg:inline-flex items-center gap-1 bg-blue-500/10 border border-blue-500/20 text-blue-300 text-xs px-2.5 py-0.5 rounded-full font-medium">
+                  🗓️ 2 Aug 2026 · 12 PM IST
+                </span>
+              </div>
               {!isLive && (
                 <div className="flex items-center gap-1.5 sm:gap-2.5">
                   {[
@@ -1112,6 +1117,47 @@ function App() {
             <p className="text-[#D7E2EA]/80 text-base sm:text-lg md:text-xl max-w-3xl mx-auto leading-relaxed font-medium">
               7 high-income AI skills. One live session. Zero technical background needed. Learn what's actually working – from someone who uses it daily.
             </p>
+          </FadeIn>
+
+          {/* Creative Event Date Card */}
+          <FadeIn delay={0.45} y={20} className="mt-8 w-full max-w-3xl mx-auto px-4">
+            <div className="relative group bg-gradient-to-r from-blue-950/40 via-[#161b26]/70 to-purple-950/40 border border-blue-500/30 rounded-2xl p-4 sm:p-6 backdrop-blur-xl shadow-[0_0_30px_rgba(59,130,246,0.15)] hover:border-blue-400/50 transition-all duration-300">
+              <div className="absolute -top-px left-1/2 -translate-x-1/2 w-1/2 h-[2px] bg-gradient-to-r from-transparent via-blue-400 to-transparent" />
+              
+              <div className="grid grid-cols-2 md:grid-cols-4 gap-4 divide-y md:divide-y-0 md:divide-x divide-white/10 text-center md:text-left">
+                <div className="pt-2 md:pt-0 md:pr-4 flex flex-col justify-center items-center md:items-start">
+                  <span className="text-[#D7E2EA]/60 text-[11px] uppercase tracking-widest font-semibold flex items-center gap-1">
+                    📅 Event Date
+                  </span>
+                  <span className="text-white font-extrabold text-lg sm:text-xl mt-0.5">2 Aug 2026</span>
+                  <span className="text-blue-400 text-xs font-medium">Sunday</span>
+                </div>
+
+                <div className="pt-2 md:pt-0 md:px-4 flex flex-col justify-center items-center md:items-start">
+                  <span className="text-[#D7E2EA]/60 text-[11px] uppercase tracking-widest font-semibold flex items-center gap-1">
+                    🕘 Live Time
+                  </span>
+                  <span className="text-white font-extrabold text-lg sm:text-xl mt-0.5">12:00 PM</span>
+                  <span className="text-blue-400 text-xs font-medium">Afternoon (IST)</span>
+                </div>
+
+                <div className="pt-3 md:pt-0 md:px-4 flex flex-col justify-center items-center md:items-start">
+                  <span className="text-[#D7E2EA]/60 text-[11px] uppercase tracking-widest font-semibold flex items-center gap-1">
+                    ⏳ Duration
+                  </span>
+                  <span className="text-white font-extrabold text-lg sm:text-xl mt-0.5">2 Hours</span>
+                  <span className="text-emerald-400 text-xs font-medium">Live + Q&A</span>
+                </div>
+
+                <div className="pt-3 md:pt-0 md:pl-4 flex flex-col justify-center items-center md:items-start">
+                  <span className="text-[#D7E2EA]/60 text-[11px] uppercase tracking-widest font-semibold flex items-center gap-1">
+                    💻 Access
+                  </span>
+                  <span className="text-white font-extrabold text-lg sm:text-xl mt-0.5">Online</span>
+                  <span className="text-cyan-400 text-xs font-medium">Private Stream</span>
+                </div>
+              </div>
+            </div>
           </FadeIn>
 
           {/* YouTube Video Embed */}
