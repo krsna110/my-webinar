@@ -306,17 +306,19 @@ const StickyCardStack = () => {
             return (
               <motion.div
                 key={mod.id}
-                className="sticky top-24 md:top-32 w-full h-[85vh] flex items-center justify-center"
+                className="sticky top-28 md:top-36 w-full h-[85vh] flex items-center justify-center"
                 style={{ scale, y }}
               >
                 <div className="relative w-full max-w-6xl h-[80vh] bg-[#111111] border-2 border-[#D7E2EA] rounded-[40px] sm:rounded-[50px] md:rounded-[60px] overflow-hidden">
-                  {/* Background image at 50% opacity */}
-                  <img
-                    src={mod.bgImage}
-                    alt=""
-                    aria-hidden="true"
-                    className="absolute inset-0 w-full h-full object-cover md:object-contain md:object-center opacity-100 pointer-events-none select-none"
-                  />
+                  {/* Background image inset so top poster title is never clipped by rounded corners or navbar */}
+                  <div className="absolute inset-2 sm:inset-4 md:inset-6 pointer-events-none select-none flex items-center justify-center">
+                    <img
+                      src={mod.bgImage}
+                      alt=""
+                      aria-hidden="true"
+                      className="w-full h-full object-cover md:object-contain object-top md:object-center opacity-100 rounded-[24px] sm:rounded-[36px] md:rounded-[44px]"
+                    />
+                  </div>
                   {/* Dark gradient overlay for text readability */}
                   <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent z-[1] pointer-events-none" />
                   {/* Card content sits above the image */}
