@@ -87,6 +87,12 @@ const itemVariants = {
 };
 
 export default function ThankYouPage() {
+  React.useEffect(() => {
+    if (typeof window !== 'undefined' && window.fbq) {
+      window.fbq('track', 'Purchase', { value: 9.00, currency: 'INR' });
+    }
+  }, []);
+
   return (
     <div
       id="thank-you-page"
