@@ -317,6 +317,8 @@ const StickyCardStack = () => {
                     aria-hidden="true"
                     className="absolute inset-0 w-full h-full object-cover opacity-100 pointer-events-none select-none"
                   />
+                  {/* Dark gradient overlay for text readability */}
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent z-[1] pointer-events-none" />
                   {/* Card content sits above the image */}
                   <div className="relative z-10 w-full h-full p-6 sm:p-8 md:p-10 flex flex-col">
                     <div className="flex items-start justify-between">
@@ -328,7 +330,7 @@ const StickyCardStack = () => {
                       </div>
                     </div>
                     <div className="flex-1 flex items-end justify-center pb-6 sm:pb-8">
-                      <p className="text-[#D7E2EA]/75 text-lg sm:text-xl md:text-2xl max-w-3xl mx-auto text-center leading-relaxed">
+                      <p className="text-white text-lg sm:text-xl md:text-2xl max-w-3xl mx-auto text-center leading-relaxed drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)]">
                         {mod.desc}
                       </p>
                     </div>
