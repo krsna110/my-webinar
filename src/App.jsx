@@ -6,6 +6,7 @@ import {
   Clock, Users, Award, Zap, Play, CheckCircle,
   ArrowRight, Mail, Phone, MapPin, Globe
 } from 'lucide-react';
+import ThankYouPage from './ThankYouPage';
 
 // Razorpay payment link - replace '#' with your actual Razorpay URL
 const RAZORPAY_URL = "#";
@@ -1504,4 +1505,8 @@ function App() {
   );
 }
 
-export default App;
+// ponytail: pathname switch — no router dep, ceiling = no nested routes needed
+export default function Root() {
+  if (window.location.pathname.endsWith('/thank-you')) return <ThankYouPage />;
+  return <App />;
+}
