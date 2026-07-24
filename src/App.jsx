@@ -8,8 +8,8 @@ import {
 } from 'lucide-react';
 import ThankYouPage from './ThankYouPage';
 
-// Razorpay payment link - replace '#' with your actual Razorpay URL
-const RAZORPAY_URL = "#";
+// Razorpay payment link
+const RAZORPAY_URL = "https://rzp.io/rzp/EkTf9JZo";
 
 // ------------------------------------------------------------
 // 1. CUSTOM CURSOR COMPONENT
