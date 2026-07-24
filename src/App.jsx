@@ -315,7 +315,7 @@ const StickyCardStack = () => {
                     src={mod.bgImage}
                     alt=""
                     aria-hidden="true"
-                    className="absolute inset-0 w-full h-full object-cover opacity-100 pointer-events-none select-none"
+                    className="absolute inset-0 w-full h-full object-cover md:object-contain md:object-center opacity-100 pointer-events-none select-none"
                   />
                   {/* Dark gradient overlay for text readability */}
                   <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent z-[1] pointer-events-none" />
