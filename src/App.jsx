@@ -1505,8 +1505,8 @@ function App() {
   );
 }
 
-// ponytail: pathname switch — no router dep, ceiling = no nested routes needed
+// ponytail: hash routing — works on GitHub Pages static hosting, no server config needed
 export default function Root() {
-  if (window.location.pathname.endsWith('/thank-you')) return <ThankYouPage />;
+  if (window.location.hash === '#/thank-you') return <ThankYouPage />;
   return <App />;
 }
