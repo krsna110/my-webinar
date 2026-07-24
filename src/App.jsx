@@ -1446,7 +1446,7 @@ function App() {
               We keep each live batch small on purpose – the smaller the room, the better the experience. The last batch filled in 48 hours.
             </p>
             <div className="mt-6 text-sm text-[#D7E2EA]/70">
-              📅 Live on [DATE] at [TIME] · Seats remaining: <span className="text-white font-bold">[X]</span>
+              📅 Live on 2 August 2026 at 12:00 PM · Seats remaining: <span className="text-white font-bold">12</span>
             </div>
 
             <div className="mt-10">
@@ -1492,7 +1492,7 @@ function App() {
                 <span>📹 Recording included</span>
                 <span>👥 Private community access</span>
               </div>
-              <p className="text-sm text-[#D7E2EA]/40 mt-2">📅 [DATE] · 🕘 [TIME] · ⏳ [DURATION] · 💻 Online</p>
+              <p className="text-sm text-[#D7E2EA]/40 mt-2">📅 2 August 2026 · 🕘 12:00 PM Afternoon · ⏳ 2 Hours · 💻 Online</p>
             </div>
           </FadeIn>
         </div>
