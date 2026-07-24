@@ -855,6 +855,7 @@ const StarfieldBackground = () => {
 // 14. MAIN APP
 // ------------------------------------------------------------
 function App() {
+  const BASE = import.meta.env.BASE_URL;
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [faqOpen, setFaqOpen] = useState(null);
 
@@ -1369,9 +1370,9 @@ function App() {
                 }}
               >
                 <img
-                  src="https://picsum.photos/200/200?random=99"
+                  src={`${BASE}WhatsApp Image 2026-06-14 at 3.44.44 PM.jpeg`}
                   alt="Pranshul"
-                  className="w-full h-full object-cover"
+                  className="w-full h-full object-cover object-top"
                 />
               </motion.div>
             </motion.div>
