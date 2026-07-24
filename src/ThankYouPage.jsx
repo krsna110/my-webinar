@@ -4,7 +4,7 @@ import { CheckCircle, MessageCircle, ArrowRight } from 'lucide-react';
 
 // ponytail: no router dep — App.jsx switches on pathname
 
-const WHATSAPP_URL = '#'; // TODO: Replace with your actual WhatsApp group invite link
+const WHATSAPP_URL = 'https://chat.whatsapp.com/CZJUXnSBi1xHFzpfFWwN9M';
 
 // ── Aurora blobs ─────────────────────────────────────────────────────────────
 const AuroraBlobs = () => (
